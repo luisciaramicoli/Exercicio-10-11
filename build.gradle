@@ -1,12 +1,35 @@
 plugins {
-	id 'java'
-	id 'application'
+    // Aplica o plugin Java para compilação
+    id 'java' 
+    // Aplica o plugin Application para criar JARs executáveis
+    id 'application'
 }
 
 repositories {
-	mavenCentral()
+    // Define o repositório central para buscar dependências (incluindo o Lombok)
+    mavenCentral()
+}
+
+dependencies {
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+    
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 }
 
 application {
-	mainClass = 'application.Main'
+    // Define a classe principal (main) da sua aplicação
+    mainClass = 'application.Main'
+}
+
+// Configuração para garantir que os testes rodem com JUnit 5 (se aplicável)
+test {
+    useJUnitPlatform()
 }
