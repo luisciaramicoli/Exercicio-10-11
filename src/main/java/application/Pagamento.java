@@ -1,13 +1,13 @@
 package application;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.UUID;
-import lombok.AccessLevel;
+
 @Getter
-@Setter
 public abstract class Pagamento {
     private String idTransacao;
     private double valor;
@@ -16,29 +16,30 @@ public abstract class Pagamento {
     @Setter(AccessLevel.PROTECTED)
     private String status;
 
-    public void exibirDetalhesPagamento(){
+    public void exibirDetalhesPagamento() {
         System.out.println("--- Detalhes do Pagamento ---");
         System.out.println("ID: " + this.idTransacao);
-        System.out.println("Valor: R$" + this.valor);
-        System.out.println("Data/Hora: "+ this.dataHora);
-        System.out.println("Descricao: "+ this.descricao);
-        System.out.println("Status: "+ this.status);
+        System.out.println("Valor: R$ " + this.valor);
+        System.out.println("Data/Hora: " + this.dataHora);
+        System.out.println("Descrição: " + this.descricao);
+        System.out.println("Status: " + this.status);
     }
 
-    private String gerarIdUnico(){
-        return "TRA-" + UUID.randomUUID().toString().toUpperCase(); 
+    private String gerarIdUnico() {
+        return "TRA-" + UUID.randomUUID().toString().toUpperCase();
     }
 
-    public Pagamento(double valor, String descricao){
+    public Pagamento(double valor, String descricao) {
         this.idTransacao = gerarIdUnico();
         this.valor = valor;
         this.descricao = descricao;
         this.dataHora = LocalDateTime.now();
         this.status = "Pendente";
     }
-    protected void setStatus(String status){
-        this.status = status;
-    }
+
+    // protected void setStatus(String status) {
+    //     this.status = status;
+    // }
 
     public abstract boolean autenticar();
     public abstract boolean validarDados();
